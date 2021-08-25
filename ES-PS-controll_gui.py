@@ -4,7 +4,7 @@ import time
 import tkinter
 from tkinter import messagebox
 
-ps_com_port = 'COM9'
+ps_com_port = 'COM8'
 out_voltage = 0
 
 
