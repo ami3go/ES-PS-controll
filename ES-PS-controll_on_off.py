@@ -47,7 +47,7 @@ try:
 
     Nreps = 1000  # number of cycles, Better to use for cycle to prevent software stuck
 
-    ONtime = 5  # on time in seconds 
+    ONtime = 5  # on time in seconds
 
     OFFtime = 5  # off time in seconds
 
