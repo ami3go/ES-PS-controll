@@ -2,11 +2,12 @@ import ea_psu_controller
 import time
 # more information on https://pypi.org/project/ea-psu-controller/
 
-ps_com_port = 'COM8'
+ps_com_port = 'COM5'
 out_voltage = 0
 
 
 ps_name = ea_psu_controller.PsuEA.PSU_DEVICE_LIST_WIN
+
 print(f'Power Supply name: {ps_name}')
 
 print(f'Connecting to  {ps_com_port}')
@@ -27,8 +28,8 @@ try:
     print(f'Turning on output')
     ps.output_on()
     out = 0.00
-    voltage_step = 0.1
-    Vout_high = 28
+    voltage_step = 0.5
+    Vout_high = 15
     Vout_low = 1
     vout = Vout_low
     Nreps = 100
