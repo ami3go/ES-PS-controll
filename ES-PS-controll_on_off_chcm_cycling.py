@@ -10,6 +10,16 @@
 import ea_psu_controller
 import time
 import datetime
+import Logging_class as logclass
+
+folder = r"C:\Users\achestni\Desktop\PycharmProjects\Libraries\ES-PS-controll\chcm_log"
+file_name = "log.txt"
+logger = logclass.txt_logger()
+logger.set_folder(folder)
+logger.set_file_name(file_name)
+logger.init("chcm_cycling")
+
+
 
 # please define your COM port
 # USB\VID_232E&PID_0010\
@@ -64,17 +74,14 @@ try:
     """
 
     for x in range(0, Nreps):
-
+        chcm_current = []
         ps.set_voltage(Vout_high)
-        time.sleep(ONtime)
-        chcm_current = ps.get_current()
-        if chcm_current < 0.4:
-            print(f"{get_time()}  Counter: {x}, Voltage: {round(ps.get_voltage(), 3)}, Current: {round(chcm_current, 3)}, NOT OK, !!low current!!")
-            for i in range(20):
-                time.sleep(ONtime)
-                print(f"{get_time()}  Counter: {x}, Voltage: {round(ps.get_voltage(), 3)}, Current: {round(ps.get_current(), 3)}, NOT OK, !!low current!!")
-        else:
-            print(f"{get_time()}  Counter: {x}, Voltage: {round(ps.get_voltage(), 3)}, Current: {round(ps.get_current(), 3)}, OK")
+
+        for samples in range(50):
+            chcm_current.append(round(ps.get_current(), 3))
+            time.sleep(0.2)
+        logger.print_and_log(f"Cnt, {x}, V, {round(ps.get_voltage(), 3)}, Cur, {chcm_current} ")
+        # print(f"{get_time()}, Cnt, {x}, V, {round(ps.get_voltage(), 3)}, Cur: {chcm_current} ")
         ps.set_voltage(Vout_low)
         time.sleep(OFFtime)
 
